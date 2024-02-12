@@ -11,6 +11,25 @@ Support for Windows is currently experimental.
 
 Contribute on [GitHub](https://github.com/acesaro/vscode-open-in-vim).
 
+## Building and Publishing
+
+Useful guide: [https://code.visualstudio.com/api/working-with-extensions/publishing-extension]()
+
+- Install npm packages defined in package.json
+```
+$ npm install
+```
+
+- Install `vsce` to package/publish extensions
+```
+$ npm install -g @vscode/vsce
+```
+
+- Build local .vsix package
+```
+$ vsce package
+```
+
 ## Extension Settings
 
 * **`open-in-vim.openMethod`**: specifies how vim should be launched. Allowed
@@ -40,10 +59,6 @@ Contribute on [GitHub](https://github.com/acesaro/vscode-open-in-vim).
   | `open-in-vim.macos.iterm.profile`             | Name of iTerm profile to use (`default profile` is a special case to use iTerm's default). | `default profile`                                  |
 
 [`code`]: https://code.visualstudio.com/docs/editor/command-line#_launching-from-command-line
-
-## To do
-
-- [ ] Support macOS' native Terminal app
 
 ## Inverse Plugin
 
