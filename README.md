@@ -9,7 +9,7 @@ Alternatively, you can [assign a keyboard shortcut of your choosing].
 
 Support for Windows is currently experimental.
 
-Contribute on [GitHub](https://github.com/jonsmithers/vscode-open-in-vim).
+Contribute on [GitHub](https://github.com/acesaro/vscode-open-in-vim).
 
 ## Extension Settings
 
@@ -26,19 +26,18 @@ Contribute on [GitHub](https://github.com/jonsmithers/vscode-open-in-vim).
   | `macos.iterm`          | Open vim in iTerm2.                                       |
   | `macos.macvim`         | Open vim in MacVim.                                       |
 
-* **`open-in-vim.useNeovim`**: whether to launch vim or neovim (ignored when
-  `openMethod` is set to gvim/macvim).
+* **`open-in-vim.vimExecutable`**: CLI editor executable name (in `$PATH`) or full path to it
 * **`open-in-vim.restoreCursorAfterVim`**: *(EXPERIMENTAL)* syncs cursor
   position from vim to vscode when you close vim. Assumes that the [`code`]
   executable is in the *$PATH*.
 * Other settings for specific openMethods are tabulated below.
   
-  | Setting                                       | Description                                                                                 | Default                                            |
-  | --------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------     |
-  | `open-in-vim.linux.gnome-terminal.args`       | Space-separated arguments that get passed to `gnome-terminal`.                              | `--hide-menubar --full-screen`                     |
-  | `open-in-vim.linux.tilix.args`                | Space-separated arguments that get passed to `tilix`.                                       | `--full-screen`                                    |
-  | `open-in-vim.integrated-terminal.pathToShell` | Path to unix shell which will host the vim process.                                         | `/bin/bash` or `C:\Program Files\Git\bin\bash.exe` |
-  | `open-in-vim.macos.iterm.profile`             | Name of iTerm profile to use (`default profile` is a special case to use iTerm's default).  | `default profile`                                  |
+  | Setting                                       | Description                                                                                | Default                                            |
+  | --------------------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+  | `open-in-vim.linux.gnome-terminal.args`       | Space-separated arguments that get passed to `gnome-terminal`.                             | `--hide-menubar --full-screen`                     |
+  | `open-in-vim.linux.tilix.args`                | Space-separated arguments that get passed to `tilix`.                                      | `--full-screen`                                    |
+  | `open-in-vim.integrated-terminal.pathToShell` | Path to unix shell which will host the vim process.                                        | `/bin/bash` or `C:\Program Files\Git\bin\bash.exe` |
+  | `open-in-vim.macos.iterm.profile`             | Name of iTerm profile to use (`default profile` is a special case to use iTerm's default). | `default profile`                                  |
 
 [`code`]: https://code.visualstudio.com/docs/editor/command-line#_launching-from-command-line
 

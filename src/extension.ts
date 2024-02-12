@@ -1,9 +1,9 @@
-import * as vscode from 'vscode';
-import * as fs from 'fs';
-import * as tmp from 'tmp';
-import * as os from 'os';
-import * as open from 'open';
 import { execSync, spawnSync } from 'child_process';
+import * as fs from 'fs';
+import * as open from 'open';
+import * as os from 'os';
+import * as tmp from 'tmp';
+import * as vscode from 'vscode';
 
 /*
  * Called when extension is activated. This happens the very first time the
@@ -12,10 +12,10 @@ import { execSync, spawnSync } from 'child_process';
 export function activate(context: vscode.ExtensionContext) {
 
     // implements command declared in package.json file
-    let disposable = vscode.commands.registerCommand('open-in-vim.open', function() {
+    let disposable = vscode.commands.registerCommand('open-in-vim.open', function () {
         try {
             openInVim();
-        } catch(e) {
+        } catch (e) {
             console.error(e);
             vscode.window.showErrorMessage("Open in Vim failed: " + e);
         }
@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 type Config = {
     openMethod: OpenMethodKey;
-    useNeovim: boolean;
+    vimExecutable: string;
     restoreCursorAfterVim: boolean;
     'integrated-terminal': {
         pathToShell: string;
@@ -59,7 +59,7 @@ function getConfiguration(): Config {
     }
 
     let openMethodLegacyAliases = [
-        ["osx.iterm",  "macos.iterm"],
+        ["osx.iterm", "macos.iterm"],
         ["osx.macvim", "macos.macvim"]
     ];
     for (let [legacyValue, newValue] of openMethodLegacyAliases) {
@@ -72,7 +72,7 @@ function getConfiguration(): Config {
 }
 
 function openInVim() {
-    const { openMethod, useNeovim, restoreCursorAfterVim } = getConfiguration();
+    const { openMethod, vimExecutable, restoreCursorAfterVim } = getConfiguration();
 
     let activeTextEditor = vscode.window.activeTextEditor;
     if (!activeTextEditor) {
@@ -111,14 +111,14 @@ function openInVim() {
 
     let position = activeTextEditor.selection.active;
     let fileName = activeTextEditor.document.fileName;
-    let line = position.line+1;
-    let column = position.character+1;
+    let line = position.line + 1;
+    let column = position.character + 1;
 
     /** autocmd VimLeavePre * execute "!code --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'" */
     let AUTOCMD_TO_SYNC_CURSOR = `'+autocmd VimLeavePre * execute "!code --goto '"'"'" . expand("%") . ":" . line(".") . ":" . col(".") . "'"'"'"'`;
 
     actualOpenMethod({
-        vim: useNeovim ? 'nvim' : 'vim',
+        vim: vimExecutable ? vimExecutable : 'vim',
         fileName: fileName,
         // cannot contain double quotes
         args: `'+call cursor(${line}, ${column})' ${restoreCursorAfterVim ? AUTOCMD_TO_SYNC_CURSOR : ''}; exit`,
@@ -238,7 +238,7 @@ const openMethods: OpenMethods = {
         let tilixCommand = `tilix ${args} --command='bash ${openArgsToScriptFile(openArgs)}'`;
         execSync(tilixCommand);
     },
-    "macos.iterm":  (openArgs: OpenMethodsArgument) => {
+    "macos.iterm": (openArgs: OpenMethodsArgument) => {
         let profile = getConfiguration().macos!.iterm!.profile;
         if (profile !== "default profile") {
             profile = `profile "${profile}"`;
@@ -248,7 +248,7 @@ const openMethods: OpenMethods = {
               set myNewWin to create window with ${profile} command "bash ${openArgsToScriptFile(openArgs)}"
             end tell
         `;
-        let result = spawnSync("/usr/bin/osascript", {encoding: "utf8", input: osascriptcode});
+        let result = spawnSync("/usr/bin/osascript", { encoding: "utf8", input: osascriptcode });
         if (result.error) {
             throw result.error;
         }

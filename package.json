@@ -2,9 +2,9 @@
     "name": "open-in-vim",
     "displayName": "Open in Vim",
     "description": "Opens current file in vim",
-    "repository": "jonsmithers/vscode-open-in-vim",
+    "repository": "acesaro/vscode-open-in-vim",
     "version": "0.7.0",
-    "publisher": "jonsmithers",
+    "publisher": "acesaro",
     "license": "MIT",
     "engines": {
         "vscode": "^1.61.0"
@@ -45,10 +45,10 @@
                     "default": "integrated-terminal",
                     "description": "Determines how vim gets launched"
                 },
-                "open-in-vim.useNeovim": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Use Neovim instead of Vim (does not apply to gvim/macvim open method)"
+                "open-in-vim.vimExecutable": {
+                    "type": "string",
+                    "default": null,
+                    "definition": "Executable in PATH or full path to CLI editor executable"
                 },
                 "open-in-vim.restoreCursorAfterVim": {
                     "type": "boolean",
@@ -99,8 +99,11 @@
         "@types/vscode": "*",
         "@typescript-eslint/eslint-plugin": "^5.51.0",
         "@typescript-eslint/parser": "^5.51.0",
+        "esbuild": "^0.20.0",
         "eslint": "^8.34.0",
         "typescript": "*",
-        "vscode-test": "*"
+        "vscode-test": "*",
+        "webpack": "^5.90.1",
+        "webpack-cli": "^5.1.4"
     }
 }
