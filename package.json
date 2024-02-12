@@ -3,7 +3,7 @@
     "displayName": "Open in Vim",
     "description": "Opens current file in vim",
     "repository": "acesaro/vscode-open-in-vim",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "publisher": "acesaro",
     "license": "MIT",
     "engines": {

@@ -3,6 +3,14 @@ All notable changes to the "open-in-vim" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.8.0] - 2024-02-12
+### Added
+- `vimExecutable` config option to point to a specific CLI editor.
+### Removed
+- `useNeovim` option to replace it with `vimExecutable`.
+### Changed
+- Forked to `acesaro/vscode-open-in-vim` in GitHub.
+
 ## [0.7.0] - 2023-02-12
 ### Added
 - Support for [Kitty](https://sw.kovidgoyal.net/kitty/) terminal
